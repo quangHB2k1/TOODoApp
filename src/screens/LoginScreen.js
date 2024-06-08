@@ -15,24 +15,21 @@ navigation.navigate("Register")
 }
 const solvingLogin = async () => {
     try {
-        const resUser = await AsyncStorage.getItem('user');
+       const resUser = await AsyncStorage.getItem('user');
+console.log(JSON.parse(resUser).email)
       if(resUser){
    const tmapUser= JSON.parse(resUser)  
-   if (tmapUser.email === email.trim() && tmapUser.password === password.trim()) 
+   if (tmapUser.email === email && tmapUser.password === password.trim()) 
       {
-      dispatch(setUser(tmapUser.todoList))
-      }}
-        // if (resUser) {
-        //     const user = JSON.parse(resUser);
-        //     console.log(JSON.stringify(user))
-        //     if (user.email === email.trim() && user.password === password.trim()) {
-        //         dispatch(setUser(user.todoList));
-        //     } else {
-        //         console.log("Email or password incorrect");
-        //     }
-        // } else {
-        //     console.log("User not found");
-        // }
+
+      dispatch(setUser(tmapUser))
+      }
+      else {
+        console.log("Email or password wrong!");
+    }
+    
+    }
+       
     } catch (error) {
         console.log("Error occurred while login: ", error);
     }

@@ -1,8 +1,9 @@
 import { Layout, Text, TopNavigation, Avatar, Input, Button, ButtonGroup } from '@ui-kitten/components'
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { images } from '../assets/index'
 import SimpleToast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet } from 'react-native';
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -48,12 +49,8 @@ const RegisterScreen = ({ navigation }) => {
       const user = {
         userName: userName,
         email: email,
-        password: password,
-        todoList:[{id:122, 
-          title:"action", 
-          des:"to do sth amazing !"
-          
-        }]
+        password: password.trim(),
+        todoList:[]
       }
       await AsyncStorage.setItem('user', JSON.stringify(user));
      
@@ -65,7 +62,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const SocialBtn = ({ name }) => (
     <Avatar
-      style={{ width: 39, height: 39 }}
+      style={styles.avata}
       source={images[name]}
     />
   )
@@ -121,7 +118,7 @@ const RegisterScreen = ({ navigation }) => {
             appearance='ghost'
             size='small'
           >
-            {evaProps => <Text category='p2' status='info'>Register ?</Text>}
+            {evaProps => <Text category='p2' status='info'>Login ?</Text>}
           </Button>
         </Layout>
         <Button
@@ -149,5 +146,7 @@ const RegisterScreen = ({ navigation }) => {
     </Layout>
   )
 }
-
+const styles = StyleSheet.create({
+ avata:{ width: 39, height: 39 },
+});
 export default RegisterScreen

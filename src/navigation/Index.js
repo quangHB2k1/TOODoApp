@@ -5,15 +5,19 @@ import RegisterScreen from "../screens/RegisterScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import TodoScreen from "../screens/TodoScreen";
 import { useSelector } from "react-redux";
+import TaskDetailScreen from "../screens/TaskDetailScreen";
+import { useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator()
 const AppStack = () => {
     return (
       <Stack.Navigator
-        initialRouteName='Login'
+        initialRouteName="Profile"
         screenOptions={{headerShown: false}}
       >
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Todo" component={TodoScreen} />
+        <Stack.Screen  name="TaskDetail" component={TaskDetailScreen}/>
       </Stack.Navigator>
     ); 
   };
@@ -30,9 +34,11 @@ const AuthStack = () => {
   };
   const Index =()=>{
     const login = useSelector(state => state.user.login)
+ 
     return(
         <NavigationContainer>
          {login ?   <AppStack/> :<AuthStack/> }
+   
         </NavigationContainer>
     )
   }
